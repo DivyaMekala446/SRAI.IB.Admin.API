@@ -5,7 +5,7 @@ namespace SRAI.IB.Admin.Core.Interfaces
 {
     public interface IAdminService
     {
-        string GetList();
+        string GetList(int retailerId, int clientId);
         List<Channels> GetChannelsList(int retailerId, int clientId);
     }
 }

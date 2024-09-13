@@ -7,7 +7,7 @@ namespace SRAI.IB.Admin.Core.Services
     public class AdminService() : IAdminService
     {
         //ITenantService tenantService
-        public string GetList()
+        public string GetList(int retailerId, int clientId)
         {
             try
             {
