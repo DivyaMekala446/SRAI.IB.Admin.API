@@ -8,7 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SRAI.IB.Core" Version="20240.3.1.204" />
+    <Compile Remove="Repository\AdminDBContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="SRAI.IB.API" Version="20240.4.0.14" />
+    <PackageReference Include="SRAI.IB.Core" Version="20240.4.0.14" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
+using SRAI.IB.Admin.Core;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
@@ -42,12 +42,12 @@ namespace SRAI.IB.Admin.API
                 Title = ApiName
             });
 
-            //c.SwaggerDoc("v2", new OpenApiInfo
-            //{
-            //    Version = "v2",
-            //    Description = ApiName,
-            //    Title = ApiName
-            //});
+            c.SwaggerDoc("v2", new OpenApiInfo
+            {
+                Version = "v2",
+                Description = ApiName,
+                Title = ApiName
+            });
         }
         /// <inheritdoc/>
         [ExcludeFromCodeCoverage]
@@ -62,8 +62,8 @@ namespace SRAI.IB.Admin.API
         [ExcludeFromCodeCoverage]
         public override void AddSwaggerServers(SwaggerGenOptions c)
         {
-            c.AddServer(new OpenApiServer { Description = "Local Environment Admin Server API", Url = "https://localhost:7538" });
-            //http://localhost:5183
+            c.AddServer(new OpenApiServer { Description = "Local Environment Admin Server API", Url = "https://localhost:7122" });
+            c.AddServer(new OpenApiServer { Description = "DEV Environment Dimension Server API", Url = "https://ib-d.symphonyretailai.com/admin" });
         }
 
         /// <inheritdoc/>
@@ -71,7 +71,7 @@ namespace SRAI.IB.Admin.API
         public override void ResolveLocalServices(IServiceCollection services)
         {
             services.AddApplicationInsightsTelemetry();
-            //services.ResolveAdminCore();
+            services.ResolveAdminCore();
         }
     }
 }

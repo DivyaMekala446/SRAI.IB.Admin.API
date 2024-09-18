@@ -1,30 +1,42 @@
-using SRAI.IB.Admin.Core.Interfaces;
-using SRAI.IB.Admin.Core.Services;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-// Register the service
-builder.Services.AddScoped<IAdminService, AdminService>();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+namespace SRAI.IB.Admin.API
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    /// <summary>
+    /// Program class
+    /// </summary>
+    public static class Program
+    {
+        /// <summary>
+        /// Main method
+        /// </summary>
+        /// <param name="args">args</param>
+        public static void Main(string[] args)
+        {
+            try
+            {
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// CreateHostBuilder
+        /// </summary>
+        /// <param name="args">args</param>
+        /// <returns>HostBuilder</returns>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
+                    .ReadFrom.Configuration(hostingContext.Configuration))
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
